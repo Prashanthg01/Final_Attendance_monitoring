@@ -1,0 +1,51 @@
+{% extends 'attendance/base.html' %}
+{% block content %}
+  <h1>Attendance by Month</h1>
+  <form method="post">
+    {% csrf_token %}
+    <label for="start_date">Start Date:</label>
+    <input type="date" name="start_date" id="start_date" />
+    <label for="end_date">End Date:</label>
+    <input type="date" name="end_date" id="end_date" />
+
+    <label for="semister">Semister:</label>
+    <input type="text" name="semister" id="semister" />
+    <label for="academic_year">Academic_year:</label>
+    <input type="text" name="academic_year" id="academic_year" />
+    <label for="branch">Branch:</label>
+    <input type="text" name="branch" id="branch" />
+    <button type="submit">Get</button>
+  </form>
+  {% if attendances %}
+    <h2>Attendance between {{ start_date }} and {{ end_date }}</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th>Subject Code</th>
+          <th>Student Name</th>
+          <th>Roll Number</th>
+          <th>Status</th>
+          <th>Class Name</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for attendance in attendances %}
+          <tr>
+            <td>{{ attendance.datee }}</td>
+            <td>{{ attendance.subject_code }}</td>
+            <td>{{ attendance.student }}</td>
+            <td>{{ attendance.roll_number }}</td>
+            {% if attendance.status %}
+              <td>Present</td>
+            {% else %}
+              <td>Absent</td>
+            {% endif %}
+            <td>{{ attendance.class_name }}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  {% endif %}
+  <p><a href="/">Back home</a></p>
+{% endblock %}

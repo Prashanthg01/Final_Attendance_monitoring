@@ -1,0 +1,78 @@
+{% extends 'attendance/base.html' %}
+
+{% block content %}
+
+  <h2>Filter Students</h2>
+  <p>Total Number of students: {{ num_students }}</p>
+  <p>Number of ECE students: {{ num_branch_ece }}</p>
+  <p>Number of CSE students: {{ num_branch_cse }}</p>
+  <p>Number of ISE students: {{ num_branch_ise }}</p>
+  <p>Number of MECH students: {{ num_branch_mech }}</p>
+  <p>Number of CIVIL students: {{ num_branch_civil }}</p>
+  <p>Number of male students: {{ num_gender_male }}</p>
+  <p>Number of female students: {{ num_gender_female }}</p>
+  <p>Number of other students: {{ num_gender_others }}</p>
+  <form>
+  <label for="academic_year">Academic Year:</label>
+  <input type="text" id="academic_year" name="academic_year">
+  
+  <label for="semister">Semister:</label>
+  <input type="text" id="semister" name="semister">
+  
+  <label for="section">Section:</label>
+  <input type="text" id="section" name="section">
+  
+  <label for="branch">Branch:</label>
+  <select id="branch" name="branch">
+    <option value="">--Select Branch--</option>
+    <option value="ECE">ECE</option>
+    <option value="CSE">CSE</option>
+    <option value="ISE">ISE</option>
+    <option value="MECH">MECH</option>
+    <option value="CIVIL">CIVIL</option>
+  </select>
+  
+  <button type="submit">Filter</button>
+</form>
+
+  {% if students %}
+    <h2>Attendance for {{ academic_year }} - Semister {{ semister }} - Section {{ section }}</h2>
+    <form method="post">
+      {% csrf_token %}
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Attendance</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for student in students %}
+            <tr>
+              <td>
+                {{ student.name }}
+                <td>{{ student.roll_number }}</td>
+                <input type="hidden" name="roll_number-{{ student.id }}" value="{{ student.roll_number }}">
+              </td>
+              <td><input type="checkbox" name="student-{{ student.id }}" value="1"></td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      <label for="subject_code">Enter Subject code:</label>
+      <input type="text" id="subject_code" name="subject_code">
+      <label for="session">Enter Session:</label>
+      <input type="text" id="session" name="session">
+      <label for="session">Enter Session:</label>
+      <input type="date" id="datee" name="datee">
+      <button type="submit">Submit Attendance</button>
+    </form>
+  {% else %}
+    <p>No students found for the selected filters.</p>
+  {% endif %}
+
+  <a href="/result">Get individual Report</a><br><hr>
+  <a href="/classresult">Get class Report</a><br><hr>
+  <a href="/monthlyresult">Get monlthly Report</a>
+
+{% endblock %}

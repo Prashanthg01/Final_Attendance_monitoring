@@ -1,0 +1,39 @@
+<!-- attendance/result.html -->
+{% extends 'attendance/base.html' %} 
+{% block content %}
+  <h1>Attendance Result</h1>
+  <form method="post">
+    {% csrf_token %}
+    <label for="subject_code">Enter Subject code:</label>
+    <input type="text" name="subject_code" id="subject_code" />
+    <label for="roll_number">Enter USN:</label>
+    <input type="text" name="roll_number" id="roll_number" />
+    <button type="submit">Get</button>
+  </form>
+  {% if attendances %}
+    <h2>Attendance for {{ subject_code }} - {{ roll_number }}</h2>
+    <p>Number of presents: {{ num_presents }}</p>
+    <p>Number of absents: {{ num_absents }}</p>
+    <table>
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for attendance in attendances %}
+          <tr>
+            <td>{{ attendance.datee }}</td>
+            {% if attendance.status %}
+              <td>Present</td>
+            {% else %}
+              <td>Absent</td>
+            {% endif %}
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  {% endif %}
+  <p><a href="/">Back home</a></p>
+{% endblock %}
