@@ -2,38 +2,63 @@
 
 {% block content %}
 
-  <h2>Filter Students</h2>
-  <p>Total Number of students: {{ num_students }}</p>
-  <p>Number of ECE students: {{ num_branch_ece }}</p>
-  <p>Number of CSE students: {{ num_branch_cse }}</p>
-  <p>Number of ISE students: {{ num_branch_ise }}</p>
-  <p>Number of MECH students: {{ num_branch_mech }}</p>
-  <p>Number of CIVIL students: {{ num_branch_civil }}</p>
-  <p>Number of male students: {{ num_gender_male }}</p>
-  <p>Number of female students: {{ num_gender_female }}</p>
-  <p>Number of other students: {{ num_gender_others }}</p>
-  <form>
-  <label for="academic_year">Academic Year:</label>
-  <input type="text" id="academic_year" name="academic_year">
-  
-  <label for="semister">Semister:</label>
-  <input type="text" id="semister" name="semister">
-  
-  <label for="section">Section:</label>
-  <input type="text" id="section" name="section">
-  
-  <label for="branch">Branch:</label>
-  <select id="branch" name="branch">
-    <option value="">--Select Branch--</option>
-    <option value="ECE">ECE</option>
-    <option value="CSE">CSE</option>
-    <option value="ISE">ISE</option>
-    <option value="MECH">MECH</option>
-    <option value="CIVIL">CIVIL</option>
-  </select>
-  
-  <button type="submit">Filter</button>
-</form>
+  <div class='student_num'>
+    <div>
+      <p style='background-color:lightcoral;'>Total Number of students: <span>{{ num_students }}</span></p>
+    </div>
+    <div>
+      <p style='background-color:lightblue;'>Number of ECE students: <span>{{ num_branch_ece }}</span></p>
+    </div>
+    <div>
+      <p style='background-color:lightgreen;'>Number of CSE students: <span>{{ num_branch_cse }}</span></p>
+    </div>
+    <div>
+      <p style='background-color:coral;'>Number of ISE students: <span>{{ num_branch_ise }}</span></p>
+    </div>
+    <div>
+      <p style='background-color:lavender;'>Number of MECH students: <span>{{ num_branch_mech }}</span></p>
+    </div>
+    <div>
+      <p style='background-color:lightseagreen;'>Number of CIVIL students: <span>{{ num_branch_civil }}</span></p>
+    </div>
+    <div>
+      <p style='background-color:darkorchid;'>Number of male students: <span>{{ num_gender_male }}</span></p>
+    </div>
+    <div>
+      <p style='background-color:lightgoldenrodyellow;'>Number of female students: <span>{{ num_gender_female }}</span></p>
+    </div>
+    <div>
+      <p style='background-color:lightsteelblue;'>Number of other students: <span>{{ num_gender_others }}</span></p>
+    </div>
+  </div>
+
+<div class='attendance_take'>
+  <details>
+    <summary>Take Attendance</summary>
+    <p><form>
+      <label for="academic_year">Academic Year:</label>
+      <input type="text" id="academic_year" name="academic_year">
+      
+      <label for="semister">Semister:</label>
+      <input type="text" id="semister" name="semister">
+      
+      <label for="section">Section:</label>
+      <input type="text" id="section" name="section">
+      
+      <label for="branch">Branch:</label>
+      <select id="branch" name="branch">
+        <option value="">--Select Branch--</option>
+        <option value="ECE">ECE</option>
+        <option value="CSE">CSE</option>
+        <option value="ISE">ISE</option>
+        <option value="MECH">MECH</option>
+        <option value="CIVIL">CIVIL</option>
+      </select>
+      
+      <button type="submit">Filter</button>
+    </form></p>
+  </details>
+</div>
 
   {% if students %}
     <h2>Attendance for {{ academic_year }} - Semister {{ semister }} - Section {{ section }}</h2>
@@ -44,6 +69,7 @@
           <tr>
             <th>Name</th>
             <th>Attendance</th>
+            <th>Status</th>
           </tr>
         </thead>
         <tbody>
@@ -68,11 +94,12 @@
       <button type="submit">Submit Attendance</button>
     </form>
   {% else %}
-    <p>No students found for the selected filters.</p>
+    <p class='erro_msg'>No students found for the selected filters.</p>
   {% endif %}
 
-  <a href="/result">Get individual Report</a><br><hr>
-  <a href="/classresult">Get class Report</a><br><hr>
+<div class='links_download'>
+  <a href="/result">Get individual Report</a>
+  <a href="/classresult">Get class Report</a>
   <a href="/monthlyresult">Get monlthly Report</a>
-
+</div>
 {% endblock %}

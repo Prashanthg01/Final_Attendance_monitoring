@@ -41,7 +41,7 @@ body {
   }
   
   input[type="text"], select {
-    width: 200px;
+    width: 300px;
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 4px;
@@ -65,7 +65,7 @@ body {
     display: inline-block;
     margin-right: 10px;
     margin-bottom: 20px;
-    color: #4CAF50;
+    color: #146917;
     font-weight: bold;
     text-decoration: none;
   }
@@ -95,7 +95,75 @@ body {
   label[for="session"] {
     margin-right: 20px;
   }
-  
+  /* ///////////////////////////////////mine///////////////////////////////// */
+  .student_num {
+    display: flex;
+    width: 100%;
+    overflow-x: scroll;
+  }
+  .student_num div p {
+    width: 140px;
+    padding: 20px;
+    border-radius: 10px;
+    line-height: 30px;
+    margin: 5px;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+  }
+  .student_num div p span {
+    padding: 10px;
+    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+    border-radius: 50%;
+    background-color: #fff;
+  }
+  details {
+    padding: 10px;
+    margin: 5px;
+    box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+    width: fit-content;
+    border-radius: 10px;
+  }
+  form {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+  }
+  .attendance_take {
+    display: flex;
+  }
+  .erro_msg {
+    background: #fd9090;
+    padding: 10px;
+    border-left: 5px solid red;
+    border-radius: 5px 0px 0px 5px;
+  }
+  .links_download {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+  .links_download a {
+    padding: 10px;
+    background: palegreen;
+    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+    border-radius: 10px;
+    width: fit-content;
+  }
+  #datee {
+    width: 300px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-bottom: 20px;
+  }
+  button[type="submit"] {
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 320px;
+}
   /* Responsive Styles */
   @media only screen and (max-width: 600px) {
     input[type="text"], select {

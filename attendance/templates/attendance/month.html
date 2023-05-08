@@ -21,9 +21,6 @@
     <table>
       <thead>
         <tr>
-          {% for attendance in attendances %}
-          <th>{{ attendance.subject_code }}</th>
-          {% endfor %}
           <th>Subject Code</th>
           <th>Student Name</th>
           <th>Roll Number</th>
@@ -33,6 +30,7 @@
       <tbody>
         {% for attendance in attendances %}
           <tr>
+            <td>{{ attendance.subject_code }}
             <td>{{ attendance.student }}</td>
             <td>{{ attendance.roll_number }}</td>
             {% if attendance.status %}

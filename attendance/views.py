@@ -61,7 +61,10 @@ def home(request):
         'num_branch_civil': num_branch_civil,
         'num_gender_male': num_gender_male,
         'num_gender_female': num_gender_female,
-        'num_gender_others': num_gender_others
+        'num_gender_others': num_gender_others,
+        'semister': semister,
+        'academic_year': academic_year,
+        'section': section
     })
 
 def result(request):
