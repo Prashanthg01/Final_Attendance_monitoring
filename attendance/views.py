@@ -95,7 +95,8 @@ def attendance_by_month(request):
         semister = request.POST.get('semister')
         academic_year = request.POST.get('academic_year')
         branch = request.POST.get('branch')
-        attendances = Attendance.objects.filter(datee__range=[start_date, end_date], branch=branch, academic_year=academic_year, semister=semister).order_by('-datee')
+        subject_code = request.POST.get('subject_code')
+        attendances = Attendance.objects.filter(datee__range=[start_date, end_date], branch=branch, academic_year=academic_year, semister=semister, subject_code=subject_code).order_by('-datee')
         return render(request, 'attendance/month.html', {
             'attendances': attendances,
             'start_date': start_date,

@@ -164,10 +164,27 @@ body {
     cursor: pointer;
     width: 320px;
 }
+.register_btn button {
+  padding: 5px;
+    margin: 5px;
+    box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+    width: fit-content;
+    border-radius: 10px;
+    border: none;
+    background: #fff;
+    font-size: 15px;
+}
+.register_btn a {
+  margin: auto;
+  padding: 10px;
+}
   /* Responsive Styles */
   @media only screen and (max-width: 600px) {
     input[type="text"], select {
-      width: 100%;
+      width: 270px;
+    }
+    .attendance_take {
+      flex-direction: column;
     }
     
     button[type="submit"] {

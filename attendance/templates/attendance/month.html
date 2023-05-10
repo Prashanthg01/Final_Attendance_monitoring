@@ -9,11 +9,42 @@
     <input type="date" name="end_date" id="end_date" />
 
     <label for="semister">Semister:</label>
-    <input type="text" name="semister" id="semister" />
-    <label for="academic_year">Academic_year:</label>
-    <input type="text" name="academic_year" id="academic_year" />
-    <label for="branch">Branch:</label>
-    <input type="text" name="branch" id="branch" />
+    <select id="semister" name="semister">
+      <option value="">--Select Branch--</option>
+      <option value="1SEM">1st sem</option>
+      <option value="2SEM">2nd sem</option>
+      <option value="3SEM">3rd sem</option>
+      <option value="4SEM">4th sem</option>
+      <option value="5SEM">5th sem</option>
+      <option value="6SEM">6th sem</option>
+      <option value="7SEM">7th sem</option>
+      <option value="8SEM">8th sem</option>
+    </select>
+    <label for="academic_year">Academic Year:</label>
+      <select id="academic_year" name="academic_year">
+        <option value="">--Select Academic year--</option>
+        <option value="2018">2018</option>
+        <option value="2019">2019</option>
+        <option value="2020">2020</option>
+        <option value="2021">2021</option>
+        <option value="2022">2022</option>
+        <option value="2023">2023</option>
+        <option value="2024">2024</option>
+        <option value="2025">2025</option>
+        <option value="2026">2026</option>
+        <option value="2027">2027</option>
+      </select>
+      <label for="branch">Branch:</label>
+      <select id="branch" name="branch">
+        <option value="">--Select Branch--</option>
+        <option value="ECE">ECE</option>
+        <option value="CSE">CSE</option>
+        <option value="ISE">ISE</option>
+        <option value="MECH">MECH</option>
+        <option value="CIVIL">CIVIL</option>
+      </select>
+    <label for="subject_code">Subject code:</label>
+    <input type="text" name="subject_code" id="subject_code" />
     <button type="submit">Get</button>
   </form>
   {% if attendances %}

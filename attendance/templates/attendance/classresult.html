@@ -4,9 +4,21 @@
   {% csrf_token %}
   <label for="subject_code">Subject code:</label>
   <input type="text" name="subject_code" id="subject_code" />
-  <label for="subject_code">Class Session:</label>
-  <input type="text" name="session" id="session" />
-  <label for="subject_code">Class Date:</label>
+
+  <label for="session">Enter Session:</label>
+      <select id="session" name="session">
+        <option value="">--Select Session--</option>
+        <option value="M1">Morning 1st class</option>
+        <option value="M2">Morning 2nd class</option>
+        <option value="M3">Morning 3rd class</option>
+        <option value="M4">Morning 4th class</option>
+        <option value="A1">Afternoon 1st class</option>
+        <option value="A2">Afternoon 2nd class</option>
+        <option value="A3">Afternoon 3rd class</option>
+        <option value="CIVIL">CIVIL</option>
+      </select>
+
+  <label for="class_date">Class Date:</label>
   <input type="date" name="datee" id="datee" />
   <button type="submit">Get</button>
 </form>
