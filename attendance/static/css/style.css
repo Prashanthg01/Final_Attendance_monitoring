@@ -11,7 +11,7 @@ body {
   }
   
   table {
-    width: 100%;
+    width: auto;
     border-collapse: collapse;
     margin-bottom: 30px;
   }
@@ -148,7 +148,7 @@ body {
     border-radius: 10px;
     width: fit-content;
   }
-  #datee {
+  #datee, #start_date, #end_date {
     width: 300px;
     padding: 10px;
     border: 1px solid #ccc;
@@ -177,6 +177,36 @@ body {
 .register_btn a {
   margin: auto;
   padding: 10px;
+}
+.table_main {
+  display: flex;
+  gap: 10px;
+}
+.class_data {
+  display: grid;
+}
+.status_datas {
+  display: flex;
+}
+.status_datas p {
+  margin: 5px;
+}
+.present_data {
+  padding: 5px 10px;
+  background-color: #146917;
+  border-radius: 50%;
+  color: #fff;
+  font-weight: 500;
+}
+.absent_data {
+  padding: 5px 10px;
+  background-color: #a40000;
+  border-radius: 50%;
+  color: #fff;
+  font-weight: 500;
+}
+tbody {
+  display: table;
 }
   /* Responsive Styles */
   @media only screen and (max-width: 600px) {

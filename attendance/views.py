@@ -96,10 +96,40 @@ def attendance_by_month(request):
         academic_year = request.POST.get('academic_year')
         branch = request.POST.get('branch')
         subject_code = request.POST.get('subject_code')
-        attendances = Attendance.objects.filter(datee__range=[start_date, end_date], branch=branch, academic_year=academic_year, semister=semister, subject_code=subject_code).order_by('-datee')
+        section = request.POST.get('section')
+        attendances = Attendance.objects.filter(datee__range=[start_date, end_date], branch=branch, section=section, academic_year=academic_year, semister=semister, subject_code=subject_code).order_by('-datee')
+        roll_num = Attendance.objects.filter(datee__range=[start_date, end_date], branch=branch, academic_year=academic_year, semister=semister).values('roll_number').distinct()
+        students_data = Attendance.objects.filter(datee__range=[start_date, end_date], branch=branch, academic_year=academic_year, semister=semister).values('student__name').distinct()
+        num_absents = attendances.filter(status=False).count()
+        num_presents = attendances.filter(status=True).count()
+        
+        students = set(attendance.student for attendance in attendances)
+
+        student_data = []
+
+        for student in students:
+            student_attendances = attendances.filter(student=student)
+            num_presents = student_attendances.filter(status=True).count()
+            num_absents = student_attendances.filter(status=False).count()
+            sum = num_absents + num_presents
+            percentage = (num_presents / sum) * 100
+            formatted_percentage = "{:.2f}".format(percentage)
+            student_data.append({
+                'name': student,
+                'num_presents': num_presents,
+                'num_absents': num_absents,
+                'formatted_percentage': formatted_percentage
+            })
+        
         return render(request, 'attendance/month.html', {
             'attendances': attendances,
             'start_date': start_date,
-            'end_date': end_date
+            'end_date': end_date,
+            'num_absents':num_absents,
+            'num_presents':num_presents,
+            'student_data': student_data,
+            'roll_num': roll_num,
+            'students_data':students_data,
+            'subject_code':subject_code
         })
     return render(request, 'attendance/month.html')

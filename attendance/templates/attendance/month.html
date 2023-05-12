@@ -43,36 +43,49 @@
         <option value="MECH">MECH</option>
         <option value="CIVIL">CIVIL</option>
       </select>
+      <label for="section">Section:</label>
+      <select id="section" name="section">
+        <option value="">--Select section--</option>
+        <option value="A">A section</option>
+        <option value="B">B section</option>
+        <option value="C">C section</option>
+        <option value="D">D section</option>
+        <option value="E">E section</option>
+      </select>
     <label for="subject_code">Subject code:</label>
     <input type="text" name="subject_code" id="subject_code" />
     <button type="submit">Get</button>
   </form>
   {% if attendances %}
-    <h2>Attendance between {{ start_date }} and {{ end_date }}</h2>
+    <h2>Attendance between {{ start_date }} and {{ end_date }} for {{ subject_code }}</h2>
+  <div class='table_main'>
     <table>
-      <thead>
-        <tr>
-          <th>Subject Code</th>
-          <th>Student Name</th>
-          <th>Roll Number</th>
-          <th>Status</th>
-        </tr>
-      </thead>
-      <tbody>
-        {% for attendance in attendances %}
-          <tr>
-            <td>{{ attendance.subject_code }}
-            <td>{{ attendance.student }}</td>
-            <td>{{ attendance.roll_number }}</td>
-            {% if attendance.status %}
-              <td>Present</td>
-            {% else %}
-              <td>Absent</td>
-            {% endif %}
-          </tr>
-        {% endfor %}
-      </tbody>
+      <tr>
+        <th>USN</th>
+      </tr>
+      {% for attendance in roll_num %}
+      <tr>
+        <td>{{ attendance.roll_number }}</td>
+      </tr>
+      {% endfor %}
     </table>
+    <table>
+      <tr>
+        <th>Student</th>
+        <th>No of Absents</th>
+        <th>No of Presents</th>
+        <th>Total Percentage</th>
+      </tr>
+      {% for i in student_data %}
+      <tr>
+        <td>{{ i.name }}</td>
+        <td>{{ i.num_absents }}</td>
+        <td>{{ i.num_presents }}</td>
+        <td>{{ i.formatted_percentage }}%</td>
+      </tr>
+      {% endfor %}
+    </table>
+  </div>
   {% endif %}
   <p><a href="/">Back home</a></p>
 {% endblock %}
