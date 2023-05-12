@@ -2,7 +2,7 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from .models import Student, Attendance
-
+from .models import IA_marks
 
 def home(request):
     num_students = Student.objects.count()
@@ -133,3 +133,35 @@ def attendance_by_month(request):
             'subject_code':subject_code
         })
     return render(request, 'attendance/month.html')
+
+def add_student(request):
+    if request.method == 'POST':
+        # Get the data from the POST request
+        name = request.POST.get('name')
+        semester = request.POST.get('semester')
+        ia_one = request.POST.get('ia_one')
+        ia_two = request.POST.get('ia_two')
+        ia_three = request.POST.get('ia_three')
+        
+        student = IA_marks.objects.filter(name=name, semester=semester).first()
+        ia = IA_marks.objects.filter(ia_one=ia_one, ia_two=ia_two, ia_three=ia_three)
+        
+        if student:
+            if ia_one:
+                student.ia_one = ia_one
+                student.save()
+            
+            if ia_two:
+                student.ia_two = ia_two
+                student.save()
+                
+            if ia_three:
+                student.ia_three = ia_three
+                student.save()
+        else:
+            student = IA_marks(name=name, semester=semester, ia_one=ia_one, ia_two=ia_two, ia_three=ia_three)
+            student.save()
+
+        return redirect('add_student')
+
+    return render(request, 'attendance/ia.html')

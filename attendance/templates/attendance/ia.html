@@ -1,0 +1,25 @@
+{% extends 'attendance/base.html' %}
+
+{% block content %}
+  <h2>Add Student</h2>
+  <form method="POST">
+    {% csrf_token %}
+    <label for="name">Name:</label>
+    <input type="text" name="name" required><br>
+  
+    <label for="semester">Semester:</label>
+    <input type="text" name="semester" required><br>
+  
+    <label for="ia_one">Phone 1st IA marks:</label>
+    <input type="text" name="ia_one"><br>
+
+    <label for="ia_two">Phone 2nd IA marks:</label>
+    <input type="text" name="ia_two"><br>
+
+    <label for="ia_three">Phone 3rd IA marks:</label>
+    <input type="text" name="ia_three"><br>
+  
+    <button type="submit">Add Student</button>
+  </form>
+  
+{% endblock %}

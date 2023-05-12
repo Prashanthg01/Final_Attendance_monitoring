@@ -35,7 +35,9 @@ class Student(models.Model):
     phone_number = models.CharField(max_length=15)
     guardian_phone_number = models.CharField(max_length=15)
     address = models.TextField()
-
+    ia_one = models.CharField(max_length=10, blank=True)
+    ia_two = models.CharField(max_length=10, blank=True)
+    ia_three = models.CharField(max_length=10, blank=True)
     def __str__(self):
         return self.name
 
@@ -77,3 +79,13 @@ class Attendance(models.Model):
 
     def __str__(self):
         return f'{self.student.name} - {self.date}'
+
+class IA_marks(models.Model):
+    name = models.CharField(max_length=100)
+    semester = models.CharField(max_length=10)
+    ia_one = models.CharField(max_length=15)
+    ia_two = models.CharField(max_length=15)
+    ia_three = models.CharField(max_length=15)
+
+    def __str__(self):
+        return self.name
