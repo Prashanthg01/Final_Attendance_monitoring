@@ -1,27 +1,35 @@
 {% extends 'attendance/base.html' %} {% block content %}
 <h1>Attendance Result</h1>
-<form method="post">
-  {% csrf_token %}
-  <label for="subject_code">Subject code:</label>
-  <input type="text" name="subject_code" id="subject_code" />
-
-  <label for="session">Enter Session:</label>
-      <select id="session" name="session">
-        <option value="">--Select Session--</option>
-        <option value="M1">Morning 1st class</option>
-        <option value="M2">Morning 2nd class</option>
-        <option value="M3">Morning 3rd class</option>
-        <option value="M4">Morning 4th class</option>
-        <option value="A1">Afternoon 1st class</option>
-        <option value="A2">Afternoon 2nd class</option>
-        <option value="A3">Afternoon 3rd class</option>
-        <option value="CIVIL">CIVIL</option>
-      </select>
-
-  <label for="class_date">Class Date:</label>
-  <input type="date" name="datee" id="datee" />
-  <button type="submit">Get</button>
-</form>
+<div class='attendance_take'>
+  <form method="post" class='main_form'>
+    {% csrf_token %}
+    <li>
+      <label for="subject_code">Subject code:</label>
+      <input type="text" name="subject_code" id="subject_code" />
+    </li>
+    <li>
+      <label for="session">Enter Session:</label>
+          <select id="session" name="session">
+            <option value="">--Select Session--</option>
+            <option value="M1">Morning 1st class</option>
+            <option value="M2">Morning 2nd class</option>
+            <option value="M3">Morning 3rd class</option>
+            <option value="M4">Morning 4th class</option>
+            <option value="A1">Afternoon 1st class</option>
+            <option value="A2">Afternoon 2nd class</option>
+            <option value="A3">Afternoon 3rd class</option>
+            <option value="CIVIL">CIVIL</option>
+          </select>
+      </li>
+      <li>
+        <label for="class_date">Class Date:</label>
+        <input type="date" name="datee" id="datee" />
+      </li>
+      <li>
+         <button type="submit">Get</button>
+      </li>
+  </form>
+</div>
 {% if attendances %}
 <table>
   <thead>

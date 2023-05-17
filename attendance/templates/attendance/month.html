@@ -1,13 +1,18 @@
 {% extends 'attendance/base.html' %}
 {% block content %}
   <h1>Attendance by Month</h1>
-  <form method="post">
+  <div class='attendance_take'>
+  <form method="post" class='main_form'>
     {% csrf_token %}
+    <li>
     <label for="start_date">Start Date:</label>
     <input type="date" name="start_date" id="start_date" />
+    </li>
+    <li>
     <label for="end_date">End Date:</label>
     <input type="date" name="end_date" id="end_date" />
-
+    </li>
+    <li>
     <label for="semister">Semister:</label>
     <select id="semister" name="semister">
       <option value="">--Select Branch--</option>
@@ -20,6 +25,8 @@
       <option value="7SEM">7th sem</option>
       <option value="8SEM">8th sem</option>
     </select>
+  </li>
+  <li>
     <label for="academic_year">Academic Year:</label>
       <select id="academic_year" name="academic_year">
         <option value="">--Select Academic year--</option>
@@ -34,6 +41,8 @@
         <option value="2026">2026</option>
         <option value="2027">2027</option>
       </select>
+    </li>
+    <li>
       <label for="branch">Branch:</label>
       <select id="branch" name="branch">
         <option value="">--Select Branch--</option>
@@ -43,6 +52,8 @@
         <option value="MECH">MECH</option>
         <option value="CIVIL">CIVIL</option>
       </select>
+    </li>
+    <li>
       <label for="section">Section:</label>
       <select id="section" name="section">
         <option value="">--Select section--</option>
@@ -52,10 +63,16 @@
         <option value="D">D section</option>
         <option value="E">E section</option>
       </select>
+    </li>
+    <li>
     <label for="subject_code">Subject code:</label>
     <input type="text" name="subject_code" id="subject_code" />
+    </li>
+    <li>
     <button type="submit">Get</button>
+    </li>
   </form>
+</div>
   {% if attendances %}
     <h2>Attendance between {{ start_date }} and {{ end_date }} for {{ subject_code }}</h2>
   <div class='table_main'>

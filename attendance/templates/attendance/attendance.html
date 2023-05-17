@@ -1,0 +1,120 @@
+
+{% extends 'attendance/base.html' %}
+{% load static %}
+{% block content %}
+<h3>Take Attendance</h3>
+<div class='attendance_take'>
+    <form class='main_form'>
+        <li>
+            <label for="academic_year">Academic Year:</label>
+            <select id="academic_year" name="academic_year">
+                <option value="">--Select Academic year--</option>
+                <option value="2018">2018</option>
+                <option value="2019">2019</option>
+                <option value="2020">2020</option>
+                <option value="2021">2021</option>
+                <option value="2022">2022</option>
+                <option value="2023">2023</option>
+                <option value="2024">2024</option>
+                <option value="2025">2025</option>
+                <option value="2026">2026</option>
+                <option value="2027">2027</option>
+            </select>
+        </li>
+        <li>
+            <label for="semister">Semister:</label>
+            <select id="semister" name="semister">
+                <option value="">--Select semi--</option>
+                <option value="1SEM">1st sem</option>
+                <option value="2SEM">2nd sem</option>
+                <option value="3SEM">3rd sem</option>
+                <option value="4SEM">4th sem</option>
+                <option value="5SEM">5th sem</option>
+                <option value="6SEM">6th sem</option>
+                <option value="7SEM">7th sem</option>
+                <option value="8SEM">8th sem</option>
+            </select>
+        </li>
+        <li>
+            <label for="section">Section:</label>
+            <select id="section" name="section">
+                <option value="">--Select section--</option>
+                <option value="A">A section</option>
+                <option value="B">B section</option>
+                <option value="C">C section</option>
+                <option value="D">D section</option>
+                <option value="E">E section</option>
+            </select>
+        </li>
+        <li>
+            <label for="branch">Branch:</label>
+            <select id="branch" name="branch">
+                <option value="">--Select Branch--</option>
+                <option value="ECE">ECE</option>
+                <option value="CSE">CSE</option>
+                <option value="ISE">ISE</option>
+                <option value="MECH">MECH</option>
+                <option value="CIVIL">CIVIL</option>
+            </select>
+        </li>
+        <li>
+            <button type="submit">Filter</button>
+        </li>
+    </form>
+</div>
+
+
+  {% if students %}
+    <h2>Attendance for {{ academic_year }} - Semister {{ semister }} - Section {{ section }}</h2>
+    <form method="post">
+      {% csrf_token %}
+      <table>
+        <tbody>
+            <tr>
+                <th>Name</th>
+                <th>Attendance</th>
+                <th>Status</th>
+              </tr>
+          {% for student in students %}
+            <tr>
+              <td>
+                {{ student.name }}
+                <td>{{ student.roll_number }}</td>
+                <input type="hidden" name="roll_number-{{ student.id }}" value="{{ student.roll_number }}">
+              </td>
+              <td><input type="checkbox" name="student-{{ student.id }}" value="1"></td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      <div class='attendance_take_two'>
+        <li> 
+            <label for="subject_code">Enter Subject code:</label>
+            <input type="text" id="subject_code" name="subject_code">
+        </li>
+        <li>
+            <label for="session">Enter Session:</label>
+            <select id="session" name="session">
+                <option value="">--Select session--</option>
+                <option value="M1">Morning 1st class</option>
+                <option value="M2">Morning 2nd class</option>
+                <option value="M3">Morning 3rd class</option>
+                <option value="M4">Morning 4th class</option>
+                <option value="A1">Afternoon 1st class</option>
+                <option value="A2">Afternoon 2nd class</option>
+                <option value="A3">Afternoon 3rd class</option>
+            </select>
+        </li>
+        <li>
+            <label for="datee">Enter Session:</label>
+            <input type="date" id="datee" name="datee">
+        </li>
+        <li>
+            <button type="submit">Submit Attendance</button>
+        </li>
+      </div>
+    </form>
+  {% else %}
+    <p class='erro_msg'>No students found for the selected filters.</p>
+  {% endif %}
+{% endblock %}

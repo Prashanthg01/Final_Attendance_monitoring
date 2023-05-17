@@ -4,6 +4,48 @@ from django.contrib import messages
 from .models import Student, Attendance
 from .models import IA_marks
 
+
+def take_attendance(request):
+    academic_year = request.GET.get('academic_year')
+    semister = request.GET.get('semister')
+    section = request.GET.get('section')
+    branch = request.GET.get('branch')
+    students = Student.objects.filter(academic_year=academic_year, semister=semister, section=section, branch=branch)
+    attendance_records = []
+    subject_code = ''
+    session = ''
+    datee = ''
+    branch = ''
+
+    if request.method == 'POST':
+        subject_code = request.POST.get('subject_code')
+        session = request.POST.get('session')
+        datee = request.POST.get('datee')
+        for student in students:
+            is_present = request.POST.get(f'student-{student.id}', False)
+            roll_number = student.roll_number
+            academic_year = student.academic_year
+            semister = student.semister
+            branch = student.branch
+            section = student.section
+            Attendance.objects.create(student=student, roll_number=roll_number, section=section, branch=branch, academic_year=academic_year, semister=semister, status=is_present, subject_code=subject_code, session=session, datee=datee)
+        messages.success(request, 'Attendance has been submitted successfully!')
+        return redirect('take_attendance')
+
+    if subject_code and session and datee:
+        attendance_records = Attendance.objects.filter(subject_code=subject_code, session=session, datee=datee)
+    
+    return render(request, 'attendance/attendance.html', {
+        'students': students,
+        'attendance_records': attendance_records,
+        'subject_code': subject_code,
+        'datee': datee,
+        'session': session,
+        'semister': semister,
+        'academic_year': academic_year,
+        'section': section
+    })
+
 def home(request):
     num_students = Student.objects.count()
     num_branch_ece = Student.objects.filter(branch='ECE').count()

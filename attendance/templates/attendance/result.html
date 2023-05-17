@@ -2,26 +2,33 @@
 {% extends 'attendance/base.html' %} 
 {% block content %}
   <h1>Attendance Result</h1>
-  <form method="post">
-    {% csrf_token %}
-    <label for="subject_code">Enter Subject code:</label>
-    <input type="text" name="subject_code" id="subject_code" />
-    <label for="roll_number">Enter USN:</label>
-    <input type="text" name="roll_number" id="roll_number" />
-    <button type="submit">Get</button>
-  </form>
+  <div class='attendance_take'>
+    <form method="post" class='main_form'>
+      {% csrf_token %}
+      <li>
+        <label for="subject_code">Enter Subject code:</label>
+        <input type="text" name="subject_code" id="subject_code" />
+      </li>
+      <li>
+        <label for="roll_number">Enter USN:</label>
+        <input type="text" name="roll_number" id="roll_number" />
+      </li>
+      <li>
+        <button type="submit">Get</button>
+      </li>
+    </form>
+</div>
   {% if attendances %}
     <h2>Attendance for {{ subject_code }} - {{ roll_number }}</h2>
     <p>Number of presents: {{ num_presents }}</p>
     <p>Number of absents: {{ num_absents }}</p>
     <table>
-      <thead>
+
+      <tbody>
         <tr>
           <th>Date</th>
           <th>Status</th>
         </tr>
-      </thead>
-      <tbody>
         {% for attendance in attendances %}
           <tr>
             <td>{{ attendance.datee }}</td>

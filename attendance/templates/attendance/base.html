@@ -6,12 +6,13 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{% block title %}SVCE ATTENDANCE{% endblock %}</title>
-  <link rel="stylesheet" href="{% static 'css/style.css' %}">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
 <body>
   <div class="wrapper">
@@ -34,6 +35,9 @@
                 </ul>
             </li> {% endcomment %}
             <li class="active">
+              <a href="/">Home</a>
+            </li>
+            <li>
               <a href="/result">Get individual Report</a>
             </li>
             {% comment %} <li>
@@ -51,16 +55,19 @@
                 </ul>
             </li> {% endcomment %}
             <li>
-              <a href="/classresult">Get class Report by date</a>
+              <a href="/classresult">Get class Report</a>
             </li>
             <li>
-              <a href="/monthlyresult">Get monlthly Report by class</a>
+              <a href="/monthlyresult">Get monlthly Report</a>
             </li>
             <li>
-              <a href="/add_student">Update IA marks</a>
+              <a href="/Update_ia_marks">Update IA marks</a>
             </li>
             <li>
               <a href='/admin'>Register a new Student</a>
+            </li>
+            <li>
+              <a href='/student_attendance'>Take Attendance</a>
             </li>
         </ul>
   
