@@ -10,8 +10,180 @@ body {
     margin-bottom: 20px;
   }
   
-  table {
+  /* //////////////////nav bar/////////// */
+  /*
+    DEMO STYLE
+*/
+
+@import "https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700";
+body {
+    font-family: 'Poppins', sans-serif;
+    background: #fafafa;
+}
+
+p {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.1em;
+    font-weight: 300;
+    line-height: 1.7em;
+    color: #999;
+}
+
+a,
+a:hover,
+a:focus {
+    color: inherit;
+    text-decoration: none;
+    transition: all 0.3s;
+}
+
+.navbar {
+    padding: 15px 10px;
+    background: #fff;
+    border: none;
+    border-radius: 0;
+    margin-bottom: 40px;
+    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-btn {
+    box-shadow: none;
+    outline: none !important;
+    border: none;
+}
+
+.line {
     width: 100%;
+    height: 1px;
+    border-bottom: 1px dashed #ddd;
+    margin: 40px 0;
+}
+
+/* ---------------------------------------------------
+    SIDEBAR STYLE
+----------------------------------------------------- */
+
+.wrapper {
+    display: flex;
+    width: 100%;
+    align-items: stretch;
+}
+
+#sidebar {
+    min-width: 250px;
+    max-width: 250px;
+    background: #7386D5;
+    color: #fff;
+    transition: all 0.3s;
+}
+
+#sidebar.active {
+    margin-left: -250px;
+}
+
+#sidebar .sidebar-header {
+    padding: 20px;
+    background: #6d7fcc;
+}
+
+#sidebar ul.components {
+    padding: 20px 0;
+    border-bottom: 1px solid #47748b;
+}
+
+#sidebar ul p {
+    color: #fff;
+    padding: 10px;
+}
+
+#sidebar ul li a {
+    padding: 10px;
+    font-size: 1.1em;
+    display: block;
+}
+
+#sidebar ul li a:hover {
+    color: #7386D5;
+    background: #fff;
+}
+
+#sidebar ul li.active>a,
+a[aria-expanded="true"] {
+    color: #fff;
+    background: #6d7fcc;
+}
+
+a[data-toggle="collapse"] {
+    position: relative;
+}
+
+.dropdown-toggle::after {
+    display: block;
+    position: absolute;
+    top: 50%;
+    right: 20px;
+    transform: translateY(-50%);
+}
+
+ul ul a {
+    font-size: 0.9em !important;
+    padding-left: 30px !important;
+    background: #6d7fcc;
+}
+
+ul.CTAs {
+    padding: 20px;
+}
+
+ul.CTAs a {
+    text-align: center;
+    font-size: 0.9em !important;
+    display: block;
+    border-radius: 5px;
+    margin-bottom: 5px;
+}
+
+a.download {
+    background: #fff;
+    color: #7386D5;
+}
+
+a.article,
+a.article:hover {
+    background: #6d7fcc !important;
+    color: #fff !important;
+}
+
+/* ---------------------------------------------------
+    CONTENT STYLE
+----------------------------------------------------- */
+
+#content {
+    width: 100%;
+    padding: 20px;
+    min-height: 100vh;
+    transition: all 0.3s;
+}
+
+/* ---------------------------------------------------
+    MEDIAQUERIES
+----------------------------------------------------- */
+
+@media (max-width: 768px) {
+    #sidebar {
+        margin-left: -250px;
+    }
+    #sidebar.active {
+        margin-left: 0;
+    }
+    #sidebarCollapse span {
+        display: none;
+    }
+}
+
+/* ///////////////nav end//////////// */
+  table {
+    width: auto;
     border-collapse: collapse;
     margin-bottom: 30px;
   }
@@ -41,7 +213,7 @@ body {
   }
   
   input[type="text"], select {
-    width: 200px;
+    width: 300px;
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 4px;
@@ -65,7 +237,7 @@ body {
     display: inline-block;
     margin-right: 10px;
     margin-bottom: 20px;
-    color: #4CAF50;
+    color: #146917;
     font-weight: bold;
     text-decoration: none;
   }
@@ -95,11 +267,126 @@ body {
   label[for="session"] {
     margin-right: 20px;
   }
-  
+  /* ///////////////////////////////////mine///////////////////////////////// */
+  .student_num {
+    display: flex;
+    width: 100%;
+    overflow-x: scroll;
+  }
+  .student_num div p {
+    width: 140px;
+    padding: 20px;
+    border-radius: 10px;
+    line-height: 30px;
+    margin: 5px;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+  }
+  .student_num div p span {
+    padding: 10px;
+    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+    border-radius: 50%;
+    background-color: #fff;
+  }
+  details {
+    padding: 10px;
+    margin: 5px;
+    box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+    width: fit-content;
+    border-radius: 10px;
+  }
+  form {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+  }
+  .attendance_take {
+    display: flex;
+  }
+  .erro_msg {
+    background: #fd9090;
+    padding: 10px;
+    border-left: 5px solid red;
+    border-radius: 5px 0px 0px 5px;
+  }
+  .links_download {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+  .links_download a {
+    padding: 10px;
+    background: palegreen;
+    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+    border-radius: 10px;
+    width: fit-content;
+  }
+  #datee, #start_date, #end_date {
+    width: 300px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-bottom: 20px;
+  }
+  button[type="submit"] {
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 320px;
+}
+.register_btn button {
+  padding: 5px;
+    margin: 5px;
+    box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+    width: fit-content;
+    border-radius: 10px;
+    border: none;
+    background: #fff;
+    font-size: 15px;
+}
+.register_btn a {
+  margin: auto;
+  padding: 10px;
+}
+.table_main {
+  display: flex;
+  gap: 10px;
+}
+.class_data {
+  display: grid;
+}
+.status_datas {
+  display: flex;
+}
+.status_datas p {
+  margin: 5px;
+}
+.present_data {
+  padding: 5px 10px;
+  background-color: #146917;
+  border-radius: 50%;
+  color: #fff;
+  font-weight: 500;
+}
+.absent_data {
+  padding: 5px 10px;
+  background-color: #a40000;
+  border-radius: 50%;
+  color: #fff;
+  font-weight: 500;
+}
+tbody {
+  display: table;
+}
   /* Responsive Styles */
   @media only screen and (max-width: 600px) {
     input[type="text"], select {
-      width: 100%;
+      width: 270px;
+    }
+    .attendance_take {
+      flex-direction: column;
     }
     
     button[type="submit"] {

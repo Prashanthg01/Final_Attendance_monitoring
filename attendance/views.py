@@ -135,33 +135,40 @@ def attendance_by_month(request):
     return render(request, 'attendance/month.html')
 
 def add_student(request):
-    if request.method == 'POST':
-        # Get the data from the POST request
-        name = request.POST.get('name')
-        semester = request.POST.get('semester')
-        ia_one = request.POST.get('ia_one')
-        ia_two = request.POST.get('ia_two')
-        ia_three = request.POST.get('ia_three')
-        
-        student = IA_marks.objects.filter(name=name, semester=semester).first()
-        ia = IA_marks.objects.filter(ia_one=ia_one, ia_two=ia_two, ia_three=ia_three)
-        
-        if student:
-            if ia_one:
-                student.ia_one = ia_one
-                student.save()
-            
-            if ia_two:
-                student.ia_two = ia_two
-                student.save()
-                
-            if ia_three:
-                student.ia_three = ia_three
-                student.save()
-        else:
-            student = IA_marks(name=name, semester=semester, ia_one=ia_one, ia_two=ia_two, ia_three=ia_three)
-            student.save()
+    academic_year = request.GET.get('academic_year')
+    semister = request.GET.get('semister')
+    section = request.GET.get('section')
+    branch = request.GET.get('branch')
+    students = Student.objects.filter(academic_year=academic_year, semister=semister, section=section, branch=branch)
 
+    if request.method == 'POST':
+        subject_code = request.POST.get('subject_code')
+        datee = request.POST.get('datee')
+        for student in students:
+            roll_number = student.roll_number
+            ia_one = request.POST[f'ia_one-{student.id}']
+            ia_two = request.POST[f'ia_two-{student.id}']
+            ia_three = request.POST[f'ia_three-{student.id}']
+            # check if there's already an IA marks record for this student and subject
+            ia_marks_filter = IA_marks.objects.filter(student=student, subject_code=subject_code).first()
+            if ia_marks_filter:
+                # update IA marks if the corresponding input field is not empty
+                if ia_one:
+                    ia_marks_filter.ia_one = ia_one
+                if ia_two:
+                    ia_marks_filter.ia_two = ia_two
+                if ia_three:
+                    ia_marks_filter.ia_three = ia_three
+                ia_marks_filter.save()
+            else:
+                # create a new IA marks record if none exists for this student and subject
+                ia_marks_filter = IA_marks(student=student, datee=datee, roll_number=roll_number, subject_code=subject_code, ia_one=ia_one, ia_two=ia_two, ia_three=ia_three)
+                ia_marks_filter.save()
+
+        messages.success(request, 'IA marks have been submitted successfully!')
         return redirect('add_student')
 
-    return render(request, 'attendance/ia.html')
+    context = {
+        'students': students,
+    }
+    return render(request, 'attendance/ia.html', context)

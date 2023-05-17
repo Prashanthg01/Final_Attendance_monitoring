@@ -7,10 +7,86 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{% block title %}SVCE ATTENDANCE{% endblock %}</title>
   <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
-  <div class="container">
-    {% block content %}{% endblock %}
+  <div class="wrapper">
+    <!-- Sidebar  -->
+    <nav id="sidebar">
+  
+        <ul class="list-unstyled components">
+            {% comment %} <li class="active">
+                <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Home</a>
+                <ul class="collapse list-unstyled" id="homeSubmenu">
+                    <li>
+                        <a href="#">Home 1</a>
+                    </li>
+                    <li>
+                        <a href="#">Home 2</a>
+                    </li>
+                    <li>
+                        <a href="#">Home 3</a>
+                    </li>
+                </ul>
+            </li> {% endcomment %}
+            <li class="active">
+              <a href="/result">Get individual Report</a>
+            </li>
+            {% comment %} <li>
+                <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Pages</a>
+                <ul class="collapse list-unstyled" id="pageSubmenu">
+                    <li>
+                        <a href="#">Page 1</a>
+                    </li>
+                    <li>
+                        <a href="#">Page 2</a>
+                    </li>
+                    <li>
+                        <a href="#">Page 3</a>
+                    </li>
+                </ul>
+            </li> {% endcomment %}
+            <li>
+              <a href="/classresult">Get class Report by date</a>
+            </li>
+            <li>
+              <a href="/monthlyresult">Get monlthly Report by class</a>
+            </li>
+            <li>
+              <a href="/add_student">Update IA marks</a>
+            </li>
+            <li>
+              <a href='/admin'>Register a new Student</a>
+            </li>
+        </ul>
+  
+    </nav>
+  
+    <!-- Page Content  -->
+    <div id="content">
+  
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container-fluid">
+  
+                <button type="button" id="sidebarCollapse" class="btn btn-info">
+                    <i class="fas fa-align-left"></i>
+                    <span>Toggle Sidebar</span>
+                </button>
+
+            </div>
+        </nav>
+        {% block content %}{% endblock %}
+    </div>
   </div>
+  <script src="{% static 'js/script.js' %}"></script>
 </body>
 </html>
+
+
+
+
+

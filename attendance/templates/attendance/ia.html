@@ -1,25 +1,106 @@
 {% extends 'attendance/base.html' %}
 
 {% block content %}
-  <h2>Add Student</h2>
-  <form method="POST">
-    {% csrf_token %}
-    <label for="name">Name:</label>
-    <input type="text" name="name" required><br>
+<div class='attendance_take'>
+    <div class='register_btn'>
+      <button><a href='/admin'>Register a new Student</a></button>
+    </div>
+    <details>
+      <summary>Take Attendance</summary>
+      <p><form>
   
-    <label for="semester">Semester:</label>
-    <input type="text" name="semester" required><br>
+        <label for="academic_year">>Academic Year:</label>
+        <select id="academic_year" name="academic_year">
+          <option value="">--Select Academic year--</option>
+          <option value="2018">2018</option>
+          <option value="2019">2019</option>
+          <option value="2020">2020</option>
+          <option value="2021">2021</option>
+          <option value="2022">2022</option>
+          <option value="2023">2023</option>
+          <option value="2024">2024</option>
+          <option value="2025">2025</option>
+          <option value="2026">2026</option>
+          <option value="2027">2027</option>
+        </select>
   
-    <label for="ia_one">Phone 1st IA marks:</label>
-    <input type="text" name="ia_one"><br>
+        <label for="semister">Semister:</label>
+        <select id="semister" name="semister">
+          <option value="">--Select semi--</option>
+          <option value="1SEM">1st sem</option>
+          <option value="2SEM">2nd sem</option>
+          <option value="3SEM">3rd sem</option>
+          <option value="4SEM">4th sem</option>
+          <option value="5SEM">5th sem</option>
+          <option value="6SEM">6th sem</option>
+          <option value="7SEM">7th sem</option>
+          <option value="8SEM">8th sem</option>
+        </select>
+  
+        <label for="section">Section:</label>
+        <select id="section" name="section">
+          <option value="">--Select section--</option>
+          <option value="A">A section</option>
+          <option value="B">B section</option>
+          <option value="C">C section</option>
+          <option value="D">D section</option>
+          <option value="E">E section</option>
+        </select>
+        
+        <label for="branch">Branch:</label>
+        <select id="branch" name="branch">
+          <option value="">--Select Branch--</option>
+          <option value="ECE">ECE</option>
+          <option value="CSE">CSE</option>
+          <option value="ISE">ISE</option>
+          <option value="MECH">MECH</option>
+          <option value="CIVIL">CIVIL</option>
+        </select>
+        
+        <button type="submit">Filter</button>
+      </form></p>
+    </details>
+  </div>
+  
+    {% if students %}
+      <h2>Attendance for {{ academic_year }} - Semister {{ semister }} - Section {{ section }}</h2>
+      <form method="POST">
+        {% csrf_token %}
+        <table>
+          <tbody>
+            <tr>
+                <th>Name</th>
+                <th>Roll_number</th>
+                <th>IA one</th>
+                <th>IA two</th>
+                <th>IA three</th>
+              </tr>
+            {% for student in students %}
+              <tr>
+                <td>
+                  {{ student.name }}
+                  <input type="hidden" name="roll_number-{{ student.id }}" value="{{ student.roll_number }}">
+                </td>   
+                <td>{{ student.roll_number }}</td>
+                <td><input type="number" name="ia_one-{{ student.id }}" min="0" max="100" step="0.01"></td>
+                <td><input type="number" name="ia_two-{{ student.id }}" min="0" max="100" step="0.01"></td>
+                <td><input type="number" name="ia_three-{{ student.id }}" min="0" max="100" step="0.01"></td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+        <label for="subject_code">Enter Subject code:</label>
+        <input type="text" id="subject_code" name="subject_code">
+  
+        
 
-    <label for="ia_two">Phone 2nd IA marks:</label>
-    <input type="text" name="ia_two"><br>
+        <label for="datee">Enter Date:</label>
+        <input type="date" id="datee" name="datee">
 
-    <label for="ia_three">Phone 3rd IA marks:</label>
-    <input type="text" name="ia_three"><br>
-  
-    <button type="submit">Add Student</button>
-  </form>
+        <button type="submit">Submit Attendance</button>
+      </form>
+    {% else %}
+      <p class='erro_msg'>No students found for the selected filters.</p>
+    {% endif %}
   
 {% endblock %}

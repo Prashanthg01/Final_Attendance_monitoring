@@ -35,9 +35,6 @@ class Student(models.Model):
     phone_number = models.CharField(max_length=15)
     guardian_phone_number = models.CharField(max_length=15)
     address = models.TextField()
-    ia_one = models.CharField(max_length=10, blank=True)
-    ia_two = models.CharField(max_length=10, blank=True)
-    ia_three = models.CharField(max_length=10, blank=True)
     def __str__(self):
         return self.name
 
@@ -81,11 +78,13 @@ class Attendance(models.Model):
         return f'{self.student.name} - {self.date}'
 
 class IA_marks(models.Model):
-    name = models.CharField(max_length=100)
-    semester = models.CharField(max_length=10)
-    ia_one = models.CharField(max_length=15)
-    ia_two = models.CharField(max_length=15)
-    ia_three = models.CharField(max_length=15)
+    student = models.ForeignKey(Student, on_delete=models.CASCADE)
+    subject_code = models.CharField(max_length=15)
+    ia_one = models.DecimalField(max_digits=5, decimal_places=2, blank=True, null=True)
+    ia_two = models.DecimalField(max_digits=5, decimal_places=2, blank=True, null=True)
+    ia_three = models.DecimalField(max_digits=5, decimal_places=2, blank=True, null=True)
+    datee = models.DateField()
+    roll_number = models.CharField(max_length=50)
 
     def __str__(self):
-        return self.name
+        return f"{self.student} - {self.subject_code}"

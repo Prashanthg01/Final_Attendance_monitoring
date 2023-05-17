@@ -1,41 +1,42 @@
-{% extends 'attendance/base.html' %}
 
+{% extends 'attendance/base.html' %}
+{% load static %}
 {% block content %}
 
-  <div class='student_num'>
-    <div>
-      <p style='background-color:lightcoral;'>Total Number of students: <span>{{ num_students }}</span></p>
-    </div>
-    <div>
-      <p style='background-color:lightblue;'>Number of ECE students: <span>{{ num_branch_ece }}</span></p>
-    </div>
-    <div>
-      <p style='background-color:lightgreen;'>Number of CSE students: <span>{{ num_branch_cse }}</span></p>
-    </div>
-    <div>
-      <p style='background-color:coral;'>Number of ISE students: <span>{{ num_branch_ise }}</span></p>
-    </div>
-    <div>
-      <p style='background-color:lavender;'>Number of MECH students: <span>{{ num_branch_mech }}</span></p>
-    </div>
-    <div>
-      <p style='background-color:lightseagreen;'>Number of CIVIL students: <span>{{ num_branch_civil }}</span></p>
-    </div>
-    <div>
-      <p style='background-color:darkorchid;'>Number of male students: <span>{{ num_gender_male }}</span></p>
-    </div>
-    <div>
-      <p style='background-color:lightgoldenrodyellow;'>Number of female students: <span>{{ num_gender_female }}</span></p>
-    </div>
-    <div>
-      <p style='background-color:lightsteelblue;'>Number of other students: <span>{{ num_gender_others }}</span></p>
-    </div>
+<div class='total_num_main'>
+  <div class="t_container_one">
+    <img src="{% static 'images/group.png' %}" />
+    <h3>Total Students: <span>{{ num_students }}</span></h3>
   </div>
+  <div class='t_container_two'>
+    <li>
+      <img src="{% static 'images/cpu.png' %}" />
+      <p>ECE: <span>{{ num_branch_ece }}</span></p>
+    </li>
+    <li>
+      <img src="{% static 'images/science.png' %}" />
+      <p>CSE: <span>{{ num_branch_cse }}</span></p>
+    </li>
+    <li>
+      <img src="{% static 'images/intelligence.png' %}" />
+      <p>ISE: <span>{{ num_branch_ise }}</span></p>
+    </li>
+    <li>
+      <img src="{% static 'images/construction.png' %}" />
+      <p>MECH: <span>{{ num_branch_mech }}</span></p>
+    </li>
+    <li>
+      <img src="{% static 'images/engineers.png' %}" />
+      <p>CIVIL: <span>{{ num_branch_civil }}</span></p>
+    </li>
+  </div>
+</div>
+
+<div class="container_chart">
+  <canvas id="studentChart"></canvas>
+</div>
 
 <div class='attendance_take'>
-  <div class='register_btn'>
-    <button><a href='/admin'>Register a new Student</a></button>
-  </div>
   <details>
     <summary>Take Attendance</summary>
     <p><form>
@@ -93,6 +94,7 @@
   </details>
 </div>
 
+
   {% if students %}
     <h2>Attendance for {{ academic_year }} - Semister {{ semister }} - Section {{ section }}</h2>
     <form method="post">
@@ -140,10 +142,38 @@
   {% else %}
     <p class='erro_msg'>No students found for the selected filters.</p>
   {% endif %}
-
-<div class='links_download'>
-  <a href="/result">Get individual Report by name</a>
-  <a href="/classresult">Get class Report by date</a>
-  <a href="/monthlyresult">Get monlthly Report by class</a>
-</div>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // Student counts
+    var maleCount = 600;
+    var femaleCount = 450;
+  
+    // Get the canvas element and create the chart context
+    var canvas = document.getElementById('studentChart');
+    var ctx = canvas.getContext('2d');
+  
+    // Create the bar chart
+    var chart = new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: ['Male', 'Female'],
+        datasets: [{
+          label: 'Student Count',
+          data: [maleCount, femaleCount],
+          backgroundColor: ['rgba(54, 162, 235, 0.5)', 'rgba(255, 99, 132, 0.5)'],
+          borderColor: ['rgba(54, 162, 235, 1)', 'rgba(255, 99, 132, 1)'],
+          borderWidth: 1
+        }]
+      },
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+        }
+      }
+    });
+  });
+  
+</script>
 {% endblock %}
