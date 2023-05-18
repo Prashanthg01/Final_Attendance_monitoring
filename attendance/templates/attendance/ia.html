@@ -82,19 +82,26 @@
                   <input type="hidden" name="roll_number-{{ student.id }}" value="{{ student.roll_number }}">
                 </td>   
                 <td>{{ student.roll_number }}</td>
-                <td><input type="number" name="ia_one-{{ student.id }}" min="0" max="100" step="0.01"></td>
-                <td><input type="number" name="ia_two-{{ student.id }}" min="0" max="100" step="0.01"></td>
-                <td><input type="number" name="ia_three-{{ student.id }}" min="0" max="100" step="0.01"></td>
+                <td><input type="number" id='ia_input' name="ia_one-{{ student.id }}" min="0" max="100" step="0.01" value="{{ student.ia_one }}"></td>
+                <td><input type="number" id='ia_input' name="ia_two-{{ student.id }}" min="0" max="100" step="0.01" value="{{ student.ia_two }}"></td>
+                <td><input type="number" id='ia_input' name="ia_three-{{ student.id }}" min="0" max="100" step="0.01" value="{{ student.ia_three }}"></td>
               </tr>
             {% endfor %}
           </tbody>
         </table>
-        <label for="subject_code">Enter Subject code:</label>
-        <input type="text" id="subject_code" name="subject_code">
-        <label for="datee">Enter Date:</label>
-        <input type="date" id="datee" name="datee">
-
-        <button type="submit">Submit Attendance</button>
+        <div class='attendance_take_two'>
+          <li>
+            <label for="subject_code">Enter Subject code:</label>
+            <input type="text" id="subject_code" name="subject_code">
+          </li>
+          <li>
+            <label for="datee">Enter Date:</label>
+            <input type="date" id="datee" name="datee">
+          </li>
+          <li>
+            <button type="submit">Submit Attendance</button>
+          </li>
+        </div>
       </form>
     {% else %}
       <p class='erro_msg'>No students found for the selected filters.</p>

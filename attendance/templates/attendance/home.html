@@ -3,7 +3,7 @@
 {% load static %}
 {% block content %}
 
-<div class='total_num_main'>
+{% comment %} <div class='total_num_main'>
   <div class="t_container_one">
     <img src="{% static 'images/group.png' %}" />
     <h3>Total Students: <span>{{ num_students }}</span></h3>
@@ -30,15 +30,24 @@
       <p>CIVIL: <span>{{ num_branch_civil }}</span></p>
     </li>
   </div>
-</div>
+</div> {% endcomment %}
+<div class='total_num_main'>
 
-<div class="container_chart">
-  <canvas id="studentChart"></canvas>
+  <div class="container_chart">
+    <canvas id="totalstudentChart"></canvas>
+  </div>
+
+  <div class="container_chart">
+    <canvas id="studentChart"></canvas>
+  </div>
+
 </div>
 
 <script>
   document.addEventListener('DOMContentLoaded', function() {
+    
     // Student counts
+    var total = {{ num_students }}
     var maleCount = {{  num_gender_male }};
     var femaleCount = {{  num_gender_female }};
     var others = {{  num_gender_others }}
@@ -51,12 +60,49 @@
     var chart = new Chart(ctx, {
       type: 'bar',
       data: {
-        labels: ['Male', 'Female', 'Others'],
+        labels: ['Total', 'Male', 'Female', 'Others'],
+        datasets: [{
+          label: 'Gender Count',
+          data: [total, maleCount, femaleCount, others],
+          backgroundColor: ['#68daff', '#ff5faf', '#512d0e', '#215d0e'],
+          borderColor: ['rgba(54, 162, 235, 1)', 'rgba(255, 99, 132, 1)', '#ffc100', '#ffc100'],
+          borderWidth: 1
+        }]
+      },
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+        }
+      }
+    });
+  });
+
+  document.addEventListener('DOMContentLoaded', function() {
+    // Student counts
+    var num_students = {{  num_students }};
+    var num_branch_ece = {{  num_branch_ece }};
+    var num_branch_cse = {{  num_branch_cse }};
+    var num_branch_ise = {{  num_branch_ise }};
+    var num_branch_civil = {{  num_branch_civil }};
+    var num_branch_mech = {{  num_branch_mech }}
+
+  
+    // Get the canvas element and create the chart context
+    var total_canvas = document.getElementById('totalstudentChart');
+    var ctx = total_canvas.getContext('2d');
+  
+    // Create the bar chart
+    var chart = new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: ['Total', 'ECE', 'CSE', 'ISE', 'CIVIL', 'MECH'],
         datasets: [{
           label: 'Student Count',
-          data: [maleCount, femaleCount, others],
-          backgroundColor: ['#68daff', '#ff5faf', '#512d0e'],
-          borderColor: ['rgba(54, 162, 235, 1)', 'rgba(255, 99, 132, 1)', '#ffc100'],
+          data: [num_students, num_branch_ece, num_branch_cse, num_branch_ise, num_branch_civil, num_branch_mech],
+          backgroundColor: ['#000', '#ff6c35', '#a13cff','#001ee5', '#00c200', '#ffcd00'],
+          borderColor: ['rgba(54, 162, 235, 1)', 'rgba(255, 99, 132, 1)', '#ffc100', '#ffc100', '#ffc100', '#ffc100'],
           borderWidth: 1
         }]
       },

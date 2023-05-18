@@ -62,14 +62,14 @@ a:focus {
     align-items: stretch;
 }
 
-#studentChart {
+#studentChart, #totalstudentChart {
   display: block;
   box-sizing: border-box;
   background-color: floralwhite;
   padding: 20px;
 }
 .container_chart {
-  width: 500px;
+  width: 530px;
   margin: 10px;
   box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
 }
@@ -217,6 +217,7 @@ a.article:hover {
   
   input[type="text"], select, input {
     width: 220px;
+    color: #000;
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 4px; 
@@ -474,3 +475,52 @@ tbody {
     }
   }
   
+  @media only screen and (max-width: 600px) {
+    .total_num_main {
+      flex-direction: column;
+    }
+    .total_num_main {
+      padding: 5px;
+    }
+    .container_chart {
+      width: 290px;
+    }
+    #content {
+      padding: 10px;
+    }
+    #sidebar ul li a {
+      font-size: 16px;
+    }
+    h1, h2 {
+      font-size: 20px;
+      font-weight: 600;
+    }
+    input[type="text"], select, input {
+      padding: 5px;
+    }
+    button[type="submit"] {
+      padding: 5px 20px;
+    }
+    .navbar {
+      margin-bottom: 20px;
+    }
+    #datee, #start_date, #end_date {
+      padding: 5px;
+      width: 270px;
+    }
+    .attendance_take_two {
+      align-items: start;
+      flex-direction: column;
+      gap: 10px;
+    }
+    input[type="checkbox"] {
+      width: 50px;
+    }
+    #ia_input {
+      width: 50px;
+    }
+    form {
+      width: 100%;
+      overflow: scroll;
+    }
+  }
